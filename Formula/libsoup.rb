@@ -10,7 +10,6 @@ class Libsoup < Formula
     sha256 "182f411f04a42407f15cdf11ccfe4b32af9ba05243568bd2b7e01c5ab25d8f5f" => :high_sierra
   end
 
-  depends_on :macos # Due to Python 2
   depends_on "gobject-introspection" => :build
   depends_on "meson" => :build
   depends_on "ninja" => :build
@@ -21,10 +20,11 @@ class Libsoup < Formula
   depends_on "vala"
   unless OS.mac?
     depends_on "krb5"
+    depends_on "libxml2"
     depends_on "python@2" => :build
+  else
+    uses_from_macos "libxml2"
   end
-
-  uses_from_macos "libxml2"
 
   def install
     mkdir "build" do
